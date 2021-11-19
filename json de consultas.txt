@@ -1,0 +1,26 @@
+{
+    "Contabilidad":[
+        {"id":0,"nombre":"Consulta ingresos","proce":"PWRPCON_IngresosCFP","param":[
+            {"name":"parametro1", "type":"sql.Date","value":"valorParametro1","text":"prueba1"},
+            {"name":"parametro2", "type":"sql.Int","value":"valorParametro2","text":"prueba2"}
+        ]}
+    ],
+    "Logistica":[
+
+    ],
+    "Presidencia":[
+
+    ],
+    "Vigilancia":[
+
+    ],
+    "ComiteDeportivo": [
+
+    ],
+    "Gerencia":[
+
+    ],
+    "RecursosHumanos":[
+
+    ]
+}

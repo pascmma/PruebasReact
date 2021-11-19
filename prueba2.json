@@ -1,0 +1,106 @@
+[
+  {
+    "id": 0,
+    "area": "Contabilidad",
+    "name": "contab val",
+    "proce": "BZRAP",
+    "params": [
+      {
+        "name": "parametro1",
+        "type": "sql.Date",
+        "value": "CCvalorParametro1",
+        "text": "mostrar0"
+      },
+      {
+        "name": "parametro2",
+        "type": "sql.Date",
+        "value": "CCvalorParametro2",
+        "text": "mostrar1"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "area": "Contabilidad",
+    "name": "contab1 val2",
+    "proce": "BZRAP1",
+    "params": [
+      {
+        "name": "parametro1",
+        "type": "sql.Date",
+        "value": "CCvalorParametro1",
+        "text": "mostrar2"
+      },
+      {
+        "name": "parametro2",
+        "type": "sql.Int",
+        "value": "CCvalorParametro2",
+        "text": "mostrar3"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "area": "Gerencia",
+    "name": "Geren val",
+    "proce": "GGBZRAP",
+    "params": [
+      {
+        "name": "parametro1",
+        "type": "sql.Date",
+        "value": "GGvalorParametro1",
+        "text": "gmostrar"
+      },
+      {
+        "name": "parametro2",
+        "type": "sql.Date",
+        "value": "GGvalorParametro2",
+        "text": "gmostrar"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "area": "Gerencia",
+    "name": "Geren1 val1",
+    "proce": "GGBZRAP1",
+    "params": [
+      {
+        "name": "parametro1",
+        "type": "sql.Date",
+        "value": "GGvalorParametro1",
+        "text": "gmostrar"
+      },
+      {
+        "name": "parametro2",
+        "type": "sql.Int",
+        "value": "GGvalorParametro2",
+        "text": "gmostrar"
+      },
+      {
+        "name": "parametro3",
+        "type": "sql.Char",
+        "value": "GGvalorParametro3",
+        "text": "gmostrar"
+      },
+      {
+        "name": "parametro4",
+        "type": "sql.Char",
+        "value": "GGvalorParametro4",
+        "text": "gmostrar"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "area": "Contabilidad",
+    "name": "consulta3",
+    "proce": "procedimiento3",
+    "params": [
+      ["nombre1", "tipo1", "valor1", "texto1"],
+      ["nombre2", "tipo2", "valor2", "texto2"],
+      ["nombre3", "tipo3", "valor3", "texto3"],
+      ["nombre4", "tipo4", "valor4", "texto4"]
+    ]
+  }
+]

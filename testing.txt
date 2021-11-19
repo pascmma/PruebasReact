@@ -1,0 +1,139 @@
+
+const fs = require("fs");
+
+
+// Funcion que muestra las consultas del area que ingreso
+// Esto debe cargarase despues del login, haceindo en el return.
+// 
+
+function devolverConsultas(area){
+    const archivo = require('./prueba2.json');
+    const filtro = archivo.filter(item=>{
+       return item.area === area
+    })
+
+    console.log("El filtro de las cosnultas por el area ",filtro )
+    const vector = []
+    filtro.map(item=>{
+        vector.push(item.name)
+    })
+    console.log("El filtro de las cosnultas por el area ",vector )
+    return vector;
+}
+
+// Devolver los campos para los parametros de la consulta
+// Agregar la parte de admisnitrador para que pueda realizar todas las consultas que se requiera
+function calcularParametrosNombre(nConsulta){
+    const archivo = require('./prueba2.json');
+    const filtro = archivo.filter(item=>{
+        return item.name === nConsulta
+    });
+    const vector = []
+
+    vector.push(filtro[0].params.length)
+    console.log("filtro ",filtro[0].params)
+
+    filtro[0].params.map(item=>{
+        vector.push(item.text)
+    })
+    console.log("resultado ", vector)
+    return vector;
+
+//    console.log("La consulta consultada ",filtro)
+}
+
+// 1. Consulta conlos parametros enviados
+
+// 2. Consulta de 
+
+
+function pruebaAgregarParametros(parametros){
+    //[ nombre, tipo, valor, texto ]
+    let formato1 = {"name":"","type":"","value":"","text":""};
+    let result= [];
+    const array = Object.keys(formato1)
+    for(let i =0;i<parametros.length;i++){
+        let formato = {"name":"","type":"","value":"","text":""};
+        for(let j=1;j<array.length;j=j+2){
+            formato[array[j]] = parametros[i][j]
+        }
+        result.push(formato)
+    }
+    //console.log("Resultado final " , result)
+    return result;
+}
+
+
+function pruebaAgregarConsultas(consulta){
+    
+    console.log("identidad ", consulta)
+    fs.readFile('./prueba2.json','utf8',(err,jsonString)=>{
+        if(err){ console.log("No se pudo leer el archivo ", err ); return }
+        console.log("El archivio se leyo ", jsonString)
+    })
+    
+    let obj = {"id":"","name":"","proce":"","param":[]};
+    let parametroFormat = {"name":"","type":"","value":"","text":""}
+    let iden = archivo[consulta[0]].length;
+    
+    console.log("id  ", iden);
+    
+    const array = Object.keys(obj);
+    console.log("el array ", array,'\n')
+    const area = consulta[0];
+    console.log("El area ", area)
+    consulta[0] = archivo[consulta[0]].length;
+    
+    array.map((item,index)=>(
+        obj[item] = consulta[index]
+        ))
+    obj["param"] = pruebaAgregarParametros(consulta[3])    
+    console.log("El valor del objeto ","\n", obj)
+    const objString = JSON.stringify(obj);
+    fs.appendFile("./prueba2.json",objString,function(err) {
+    if (err) console.log( err);
+    console.log('complete');
+    });
+    
+}
+//    id ,area, name, proce, params[]
+
+function nuevoAgregarConsulta(consulta){
+    let archivo = require('./prueba2.json');
+    const iden = archivo.length
+    let obj = {"id":"","area":"","name":"","proce":"","param":[]};
+    const elarray = Object.keys(obj);
+    consulta[0] = iden;
+    elarray.map((item, index)=>( 
+
+        obj[item] = consulta[index]
+    ))
+    obj["param"] = pruebaAgregarParametros(consulta[4])
+    //console.log("La consulta en modo JSON ", obj)
+    archivo.push(obj);
+    const archivoString = JSON.stringify(archivo);
+    fs.writeFile('./prueba2.json',archivoString, err=>{
+        if(err) {console.log("Error al escribir ", err)}
+        else {console.log("Se escribio correctamente ")}
+    })
+}
+
+
+
+
+
+// Main
+
+const pruebas = [0,"Contabilidad","consulta3","procedimiento3",[
+    ["nombre1","tipo1","valor1","texto1"],
+    ["nombre2","tipo2","valor2","texto2"],
+    ["nombre3","tipo3","valor3","texto3"],
+    ["nombre4","tipo4","valor4","texto4"]
+]];
+
+//console.log("Vuleta a leer del archivo ", archivo)
+//nuevoAgregarConsulta(pruebas)
+const archivo = require("./prueba2.json");
+//console.log("El valor de el archivo modificado", archivo[4])
+//devolverConsultas("Gerencia")
+calcularParametrosNombre("contab val")
