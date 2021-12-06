@@ -1,0 +1,31 @@
+{
+  "name": "pruebas",
+  "version": "1.0.0",
+  "description": "test # PruebasReact",
+  "main": "testing.js",
+  "scripts": {
+    "dev": "nodemon testing.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pascmma/PruebasReact.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pascmma/PruebasReact/issues"
+  },
+  "homepage": "https://github.com/pascmma/PruebasReact#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "mssql": "^7.3.0",
+    "tedious": "^14.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

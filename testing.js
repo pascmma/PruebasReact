@@ -1,7 +1,31 @@
-
 const fs = require("fs");
 const { arch } = require("os");
+let cors = require('cors');
+const express = require('express');
+const app = express();
+const PORT = 4000;
+const morgan = require('morgan');
 
+app.use(morgan('dev'));
+app.use(cors());
+app.use(express.json());
+
+// Funcion que muestra la raiz princpal
+app.get('/', (req, res)=> {
+    res.send("hola mundo")
+})
+
+// Funcion que escucha el puerto
+app.listen(PORT,()=>{
+    console.log(`El servidor esta corriendo el localhost :${PORT}`)
+})
+
+app.post('/consultaTest',function(req,res){
+    const consulta = req.body
+    console.log("el nombre de la consulta ",consulta);
+    // calcularParametrosNombre(req.body);
+    return res;    
+})
 
 // 1 Funcion que muestra las consultas del area que ingreso
 // Esto debe cargarase despues del login.
@@ -30,11 +54,6 @@ function devolverConsultas(area){
     console.log("El filtro de las cosnultas por el area ",vector )
     return vector;
 }
-
-
-
-
-
 
 // Devolver los campos para los parametros de la consulta
 // Agregar la parte de admisnitrador para que pueda realizar todas las consultas que se requiera
@@ -65,13 +84,25 @@ function parametrosDeConsulta(consulta){
     const filtro = archivo.filter(item =>{
         return item.name === consulta[0]
     })
-    const temp = consulta.slice(1)
-    
+    const temp = consulta.slice(1) // Retirar el nombre de la consulta original
+    console.log("nombre de la consulta ", consulta[0])
+    console.log("parametros de consulta ",temp)
+    console.log("el filtro  ",filtro[0].params.length)
+
     //console.log("consulta ", consulta.slice(1)[1])
     filtro[0].params.map((item,index)=>{
-        item.value = temp[index]
-        item.name = "parametro"+ index
+        if(item.type === "sql.Int"){
+            item.value = parseInt(temp[index])
+            item.name = "parametro"+ index
+
+        }
+        else{
+            item.value = temp[index]
+            item.name = "parametro"+ index
+
+        }
     })
+
     const result = []
     result.push(filtro[0].proce)
     result.push(filtro[0].params)
@@ -163,12 +194,10 @@ function eliminarConsulta(nConsulta){
     else{
         for(let i=0;i<filtro.length;i++){
             if(filtro[i].id < idEliminar){
-
             }
             else{
                 filtro[i].id = i
             }
-        
         }
         const archivoString = JSON.stringify(filtro);
         fs.writeFile('./prueba.json', archivoString,err =>{
@@ -188,7 +217,7 @@ const pruebas = [0,"Contabilidad","consulta3","procedimiento3",[
     ["nombre3","tipo3","valor3","texto3"],
     ["nombre4","tipo4","valor4","texto4"]
 ]];
-const pruebaCons = ["consulta3",12,"AC",13,"MA"]
+const pruebaCons = ["Geren1 val1","abc","12",12457,"AU"]
 
 //console.log("Vuleta a leer del archivo ", archivo)
 //nuevoAgregarConsulta(pruebas)
@@ -198,5 +227,5 @@ const archivo = require("./prueba2.json");
 //calcularParametrosNombre("contab val")
 //parametrosDeConsulta(pruebaCons)
 
-eliminarConsulta("Geren val") 
+//eliminarConsulta("Geren val") 
 
