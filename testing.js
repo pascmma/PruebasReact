@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { arch } = require("os");
+const os = require("os");
 let cors = require('cors');
 const express = require('express');
 const app = express();
@@ -22,9 +22,8 @@ app.listen(PORT,()=>{
 
 app.post('/consultaTest',function(req,res){
     const consulta = req.body
-    console.log("el nombre de la consulta ",consulta);
-    // calcularParametrosNombre(req.body);
-    return res;    
+    console.log("el nombre de la consulta ",Object.values(consulta)[0]);
+     calcularParametrosNombre(Object.values(consulta)[0]).then(result=>{res.json(result)});
 })
 
 // 1 Funcion que muestra las consultas del area que ingreso
@@ -58,11 +57,14 @@ function devolverConsultas(area){
 // Devolver los campos para los parametros de la consulta
 // Agregar la parte de admisnitrador para que pueda realizar todas las consultas que se requiera
 
-function calcularParametrosNombre(nConsulta){
+async function calcularParametrosNombre(nConsulta){
+    const temporal = nConsulta;
     const archivo = require('./prueba2.json');
+    console.log("valor de temporal",temporal)
     const filtro = archivo.filter(item=>{
-        return item.name === nConsulta
+        return item.name === temporal
     });
+    console.log("retornado",filtro)
     const vector = []
 
     vector.push(filtro[0].params.length)
@@ -72,20 +74,21 @@ function calcularParametrosNombre(nConsulta){
         vector.push(item.text)
     })
     console.log("resultado ", vector)
+    let objeto = {}
+    //
     return vector;
 
 //    console.log("La consulta consultada ",filtro)
 }
 
 //  Consulta con los parametros enviados
-
 function parametrosDeConsulta(consulta){
     const archivo = require('./prueba2.json');
     const filtro = archivo.filter(item =>{
         return item.name === consulta[0]
     })
     const temp = consulta.slice(1) // Retirar el nombre de la consulta original
-    console.log("nombre de la consulta ", consulta[0])
+    console.log("nombre de la consulta ", consulta[0].ele)
     console.log("parametros de consulta ",temp)
     console.log("el filtro  ",filtro[0].params.length)
 
